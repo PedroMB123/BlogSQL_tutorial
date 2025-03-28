@@ -1,3 +1,4 @@
+const bodyParser = require("body-parser");
 const express = require("express"); // Importa biblioteca do express
 const sqlite3 = require("sqlite3"); // Importa biblioteca sqlite3
 
@@ -9,7 +10,8 @@ const db = new sqlite3.Database("user.db"); // Instância para uso de SQLite3, e
 // Este método permite enviar comandos SQl em modo 'sequencial'
 db.serialize(() => {
   db.run(
-    "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)"
+    `CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT,
+    email TEXT, tel TEXT, cpf TEXT, rg TEXT)`
   );
 });
 
@@ -20,6 +22,9 @@ console.log(__dirname);
 // O app.use é usado para acrescenter rotas novas para o express gerenciar e poder usar
 // Middleware para isso, que neste caso é o express.static, que gerencia rotas estáticas
 app.use("/static", express.static(__dirname + "/static"));
+
+// Middleware para processar as requisições do body parameters do cliente
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Configurar EJS como o motor de visualização
 app.set("view engine", "ejs");
@@ -54,6 +59,15 @@ app.post("/login", (req, res) => {
 
 app.get("/cadastro", (req, res) => {
   res.send(cadastro);
+});
+
+app.post("/cadastro", (req, res) => {
+  req.body
+    ? console.log(JSON.stringify(req.body))
+    : console.log(`Body vazio: ${req.bod}`);
+  res.send(
+    `Bem-vindo usuário: ${req.body.username}, seu email é ${req.body.email}`
+  );
 });
 
 // app.listen() deve ser o último comando da aplicação (app.js)
