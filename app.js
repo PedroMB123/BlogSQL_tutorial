@@ -1,9 +1,9 @@
-const express = require("express");
-const sqlite3 = require("sqlite3");
+const express = require("express"); // Importa biblioteca do express
+const sqlite3 = require("sqlite3"); // Importa biblioteca sqlite3
 
-const PORT = 3000; // Porta TCP do servidor HTTP da aplicação
+const PORT = 8000; // Porta TCP do servidor HTTP da aplicação
 
-const app = express();
+const app = express(); //Instãncia para uso de express
 
 const db = new sqlite3.Database("user.db"); // Instância para uso de SQLite3, e usa o arquivo 'user.db'
 // Este método permite enviar comandos SQl em modo 'sequencial'
@@ -13,8 +13,12 @@ db.serialize(() => {
   );
 });
 
-// Cria conexão com o banco de dados
+app.use("/static", express.static(__dirname + "/static"));
 
+//Configurar EJS como o motor de visualização
+app.set("view engine", "ejs");
+
+// Cria conexão com o banco de dados
 const index =
   "<a href='/'>Home</a> <a href='/sobre'>Sobre</a> <a href='/login'>login</a> <a href='/cadastro'>Cadastro</a>";
 const sobre = "Você está na página 'sobre'<br><a href='/'>Voltar</a>";
@@ -26,7 +30,7 @@ Na ARROW FUNCTION, o primeiro são os dados do servidor (REQUISITION - 'req')
 O segundo são os dados que serão enviados ao cliente (RESULT - 'res')
 |*/
 app.get("/", (req, res) => {
-  res.send(index);
+  res.render("index");
 });
 
 app.get("/sobre", (req, res) => {
@@ -34,7 +38,12 @@ app.get("/sobre", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.send(login);
+  res.render("login");
+});
+
+// Rota para processar o formulário de login
+app.post("/login", (req, res) => {
+  res.send("Login ainda não implementado");
 });
 
 app.get("/cadastro", (req, res) => {
