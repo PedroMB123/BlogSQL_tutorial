@@ -64,7 +64,7 @@ app.get("/cadastro", (req, res) => {
 app.post("/cadastro", (req, res) => {
   req.body
     ? console.log(JSON.stringify(req.body))
-    : console.log(`Body vazio: ${req.bod}`);
+    : console.log(`Body vazio: ${req.body}`);
   res.send(
     `Bem-vindo usuário: ${req.body.username}, seu email é ${req.body.email}`
   );
