@@ -57,7 +57,6 @@ app.get("/usuarios", (req, res) => {
     res.render("usertable");
   });
 });
-//commit teste
 
 // GET Cadastro
 app.get("/cadastro", (req, res) => {
