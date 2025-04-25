@@ -4,6 +4,9 @@ const bodyParser = require("body-parser"); // Importa o body-parser
 
 const PORT = 9000; // Porta TCP do servidor HTTP da aplicação
 
+// Varáveis usadas no EJS (padrão)
+let config = { title: "", footer: "" };
+
 const app = express(); // Instância para uso do Express
 
 // Cria conexão com obanco de dados
@@ -45,7 +48,9 @@ app.get("/", (req, res) => {
   // Rota raiz do meu servidor, acesse o browser com o endereço http://localhost:8000/
   // res.send(index);
   console.log("GET /index");
-  res.render("pages/cadastro", { title: "Página inicial" });
+
+  config = { title: "Página inicial", footer: "" };
+  res.render("pages/cadastro", config);
   // res.redirect("/cadastro"); // Redireciona para a ROTA cadastro
 });
 
@@ -62,7 +67,8 @@ app.get("/usuarios", (req, res) => {
 app.get("/cadastro", (req, res) => {
   console.log("GET /cadastro");
   // Rota raiz do meu servidor, acesse o browser com o endereço http://localhost:8000/cadastro
-  res.render("pages/cadastro", { title: "Se cadastre!" });
+  config = { title: "Se cadastre", footer: "" };
+  res.render("pages/cadastro", config);
 });
 
 // POST do cadastro
@@ -111,13 +117,15 @@ app.post("/cadastro", (req, res) => {
 app.get("/sobre", (req, res) => {
   console.log("GET /sobre");
   // Rota raiz do meu servidor, acesse o browser com o endereço http://localhost:8000/sobre
-  res.render("pages/sobre", { title: "Saiba mais sobre!" });
+  config = { title: "Saiba mais sobre!", footer: "" };
+  res.render("pages/sobre", config);
 });
 
 app.get("/login", (req, res) => {
   console.log("GET /login");
   // Rota raiz do meu servidor, acesse o browser com o endereço http://localhost:8000/info
-  res.render("pages/login", { title: "Entre novamente" });
+  config = { title: "Entre novamente", footer: "" };
+  res.render("pages/login", config);
 });
 
 app.post("/login", (req, res) => {
@@ -128,7 +136,8 @@ app.post("/login", (req, res) => {
 app.get("/dashboard", (req, res) => {
   console.log("GET /dashboard");
   // Rota raiz do meu servidor, acesse o browser com o endereço http://localhost:8000/info
-  res.render("pages/dashboard", { title: "Informações ai!" });
+  config = { title: "Informações aí!", footer: "" };
+  res.render("pages/dashboard", config);
 });
 
 // app.listen() deve ser o último comando da aplicação (app.js)
