@@ -8,39 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    <% for ( let index = 1; index < 12; index++){ %>
-
+    <% for ( let index = 1; index < 12; index++){ %> <% if (index % 3 == 0) { %>
     <tr>
       <td scope="col"><%= index %></td>
       <td>Nome</td>
       <td>Email</td>
       <td>Celular</td>
     </tr>
-
-    <%} %>
+    <% }%> <%} %>
   </tbody>
 </table>
-<!-- <table>
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Email</th>
-      <th scope="col">Celular</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>NOME</td>
-      <td>EMAIL</td>
-      <td>CELULAR</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>NOME</td>
-      <td>EMAIL</td>
-      <td>CELULAR</td>
-    </tr>
-  </tbody>
-</table> -->
